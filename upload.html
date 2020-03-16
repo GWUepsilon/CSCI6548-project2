@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>Feedback</title>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+		.uploadC{
+			margin-bottom: 50px;
+			background: pink;
+		}
+		.uploadC .btn{
+			margin-left: 717px;
+		}
+		
+		.container{
+			display: block;
+			width: 800px;
+			margin: 10px auto;
+		}	
+		.file{
+			display: block;
+		}
+
+		.btn{
+			display: block;
+		}
+
+		#message{
+			background: orange;
+		}
+		#fileOutput{
+			color: purple;
+			font-size: 28px;
+			font-family: Simsun;
+
+		}
+		.openc{
+			background: yellow;
+		}
+
+
+
+	</style>
+	<script>
+    function processFiles(files) {
+		var file = files[0];
+		var message = document.getElementById("message");
+		message.innerHTML = "File name：" + file.name + "<br>";
+		message.innerHTML += "File size：" + file.size + "byte<br>";
+		message.innerHTML += "File type：" + file.type + "<br>";
+	   
+		var reader = new FileReader();
+		reader.onload = function (e) {
+	    //  When this happened, data should be ready. 
+	    	var output = document.getElementById("fileOutput");  
+	    	output.textContent = e.target.result;
+	    };
+		reader.readAsText(file);
+    }
+    </script>
+</head>
+<body>
+	<div class="container">
+		<div class="uploadC">
+			<div id="">File upload part</div>
+			<form action="upload.php" method="post"
+			enctype="multipart/form-data">
+				<label  class="label" for="file">Filename:</label>
+				<input class="file" type="file" name="file" id="file" /> 
+				<br />
+				<input class="btn" type="submit" name="submit" value="Submit" />
+			</form>
+		</div>
+		<div class="openC">
+			<div>read XML part</div>
+			<!-- <link rel="stylesheet" type="text/xml" href="">//
+			<a href="file:///C:\Users\hanfu\XAMPP\htdocs\uploadFile\1.xml" target="blank">Uploaded files</a>-->
+			<input class="file" id="fileInput" type="file" size="50" onchange="processFiles(this.files)">
+		    <div id="message"></div>
+		    <div id="fileOutput"></div>
+		</div>
+	</div>
+</body>
+</html>
